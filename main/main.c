@@ -20,8 +20,10 @@
 #define TAG "BLE"
 #define DEVICE_NAME "ESP32-BLE"
 
-static void gap_event_handler(esp_gap_ble_cb_event_t event, esp_ble_gap_cb_param_t *param) {
-    switch (event) {
+static void gap_event_handler(esp_gap_ble_cb_event_t event, esp_ble_gap_cb_param_t *param)
+{
+    switch(event)
+	{
         case ESP_GAP_BLE_ADV_START_COMPLETE_EVT:
             if (param->adv_start_cmpl.status == ESP_BT_STATUS_SUCCESS) {
                 ESP_LOGI(TAG, "BLE advertising started successfully");
@@ -29,16 +31,24 @@ static void gap_event_handler(esp_gap_ble_cb_event_t event, esp_ble_gap_cb_param
                 ESP_LOGE(TAG, "Failed to start BLE advertising, error code: %d", param->adv_start_cmpl.status);
             }
             break;
-        case ESP_GAP_BLE_ADV_STOP_COMPLETE_EVT:
+
+		case ESP_GAP_BLE_ADV_STOP_COMPLETE_EVT:
             ESP_LOGI(TAG, "BLE advertising stopped");
             break;
+
         default:
             ESP_LOGI(TAG, "GAP event received: %d", event);
             break;
     }
 }
 
-void app_main() {
+
+
+
+
+void app_main()
+{
+
     esp_err_t ret = nvs_flash_init();
     if (ret == ESP_ERR_NVS_NO_FREE_PAGES || ret == ESP_ERR_NVS_NEW_VERSION_FOUND) {
         ESP_ERROR_CHECK(nvs_flash_erase());
@@ -71,6 +81,11 @@ void app_main() {
     rand_addr[5] = 0x44;
 
     ESP_ERROR_CHECK(esp_ble_gap_set_rand_addr(rand_addr));  // Set the random address
+
+
+
+
+
 
     // Define advertisement data
     esp_ble_adv_data_t adv_data = {
